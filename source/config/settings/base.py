@@ -4,7 +4,7 @@ BASE_DIR = environ.Path(__file__) - 3
 env = environ.Env()
 env.read_env(env.str('ENV_PATH', BASE_DIR('.env')))
 
-DEBUG = c.get_value('DEBUG', bool, True)
+DEBUG = env.get_value('DEBUG', bool, True)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
