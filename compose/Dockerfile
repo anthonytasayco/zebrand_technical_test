@@ -17,8 +17,12 @@ RUN apt-get update && \
     binutils libproj-dev gdal-bin \
     postgresql python3-psycopg2
 
+RUN mkdir ./source
 COPY ./source/ ./source
 COPY ./requirements ./requirements
+COPY ./compose/docker-entrypoint.sh ./entrypoint.sh
+
+RUN chmod +x ./entrypoint.sh
 
 RUN pip install -r ./requirements/local.txt
 EXPOSE 8000

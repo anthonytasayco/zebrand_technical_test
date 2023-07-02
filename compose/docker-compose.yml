@@ -14,11 +14,13 @@ services:
       build:
         context: ../
         dockerfile: ./compose/Dockerfile
+      restart: unless-stopped
+
+      env_file: ../.env
+      entrypoint: ./entrypoint.sh
       volumes:
         - ../../source:/www/source
-      ports:
-        - "8000:8000"
-      restart: unless-stopped
       depends_on:
         - db
-      env_file: ../.env
+      ports:
+        - "8000:8000"
