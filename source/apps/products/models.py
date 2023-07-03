@@ -1,6 +1,8 @@
-from apps.base.models import TimeStampedModel
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.utils.text import slugify
+from apps.base.models import TimeStampedModel
+
 
 class Brand(TimeStampedModel):
     name = models.CharField(_('name'), max_length=150)
@@ -19,6 +21,7 @@ class Product(TimeStampedModel):
     sku = models.CharField(_('sku'), max_length=10, unique=True)
     name = models.CharField(_('name'), max_length=200)
     price = models.DecimalField(_('price'), decimal_places=2, max_digits=12)
+    slug = models.SlugField(_('slug'), max_length=150, unique=True)
 
     def __str__(self):
         return f'{self.name} | {self.sku}'
@@ -26,3 +29,8 @@ class Product(TimeStampedModel):
     class Meta:
         verbose_name = _('product')
         verbose_name_plural = _('products')
+
+    def save(self, *args, **kwargs):  # new
+        if not self.slug:
+            self.slug = slugify(self.name)
+        return super().save(*args, **kwargs)

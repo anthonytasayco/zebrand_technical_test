@@ -20,6 +20,7 @@ services:
       entrypoint: ./entrypoint.sh
       volumes:
         - ../../source:/www/source
+        - .:/code:delegated
       depends_on:
         - db
       ports:
