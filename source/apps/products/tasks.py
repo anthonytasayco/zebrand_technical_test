@@ -1,7 +1,7 @@
 import logging
 from django.db.models import Q
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from apps.users.models import User
 from .models import Product
 
@@ -16,15 +16,13 @@ def send_email_admin_product_update(product_id: int, differences: dict):
     except Product.DoesNotExist:
         logger.error('Product does not exist: {}'.format(product_id))
     try:
-        e_mail = u'{0}<{1}>'.format(
-            "Notifications", settings.DEFAULT_FROM_EMAIL)
-        msg = EmailMessage(
-            'Notification for Product update information',
-            message,
-            e_mail,
-            recipient_list,
+        send_mail(
+            subject='Notification for Product update information',
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=recipient_list,
+            fail_silently=False
         )
-        msg.content_subtype = "html"
-        msg.send()
     except Exception as e:
+        print(e, 'EXCEPTION!')
         logger.error('Failed to send email: {}'.format(e))
