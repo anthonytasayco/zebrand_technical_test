@@ -20,6 +20,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [
@@ -125,3 +126,5 @@ EMAIL_HOST_PASSWORD = env.get_value('EMAIL_HOST_PASSWORD', str, None)
 DEFAULT_FROM_EMAIL = env.get_value('DEFAULT_FROM_EMAIL', str, None)
 EMAIL_PORT = env.get_value('EMAIL_PORT', int, None)
 EMAIL_USE_TLS = True
+
+ENABLE_API_DOCUMENTATION = env.get_value('ENABLE_API_DOCUMENTATION', bool, True)
