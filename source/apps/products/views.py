@@ -4,6 +4,7 @@ from .serializers import ProductSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
+from .signals import viewed_product
 
 
 class ProductViewSet(viewsets.ViewSet):
@@ -23,7 +24,8 @@ class ProductViewSet(viewsets.ViewSet):
         serializer = ProductSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
-        product = get_object_or_404(queryset, slug=slug)
+    def retrieve(self, request, slug=None):
+        product = get_object_or_404(Product, slug=slug)
         serializer = ProductSerializer(product)
+        viewed_product.send(sender=Product, product_slug=slug, user=request.user)
         return Response(serializer.data)

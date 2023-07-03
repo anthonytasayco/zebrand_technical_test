@@ -3,9 +3,10 @@ from .models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    brand_name = serializers.CharField(source="brand.name")
 
     class Meta:
         model = Product
         fields = [
-            'is_active', 'sku', 'name', 'price', 'brand'
+            'slug', 'is_active', 'brand_name', 'sku', 'name', 'price', 'brand'
         ]

@@ -21,6 +21,7 @@ class Product(TimeStampedModel):
     sku = models.CharField(_('sku'), max_length=10, unique=True)
     name = models.CharField(_('name'), max_length=200)
     price = models.DecimalField(_('price'), decimal_places=2, max_digits=12)
+    times_visited = models.PositiveIntegerField(_('times visited'), default=0)
     slug = models.SlugField(_('slug'), max_length=150, unique=True)
 
     def __str__(self):
@@ -30,7 +31,7 @@ class Product(TimeStampedModel):
         verbose_name = _('product')
         verbose_name_plural = _('products')
 
-    def save(self, *args, **kwargs):  # new
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)

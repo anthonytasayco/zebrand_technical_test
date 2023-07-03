@@ -18,6 +18,10 @@ DJANGO_APPS = [
     'django.contrib.postgres',
 ]
 
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
+
 LOCAL_APPS = [
     'apps.products',
     'apps.users',
@@ -26,6 +30,7 @@ LOCAL_APPS = [
 
 INSTALLED_APPS = \
     DJANGO_APPS + \
+    THIRD_PARTY_APPS + \
     LOCAL_APPS
 
 MIDDLEWARE = [
@@ -71,16 +76,26 @@ USE_TZ = True
 
 LANGUAGE_CODE = 'es-mx'
 
+STATIC_ROOT = str(BASE_DIR('staticfiles'))
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    str(BASE_DIR.path('static')),
+]
+
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
 
 AUTH_USER_MODEL = 'users.User'
 
 ADMIN_URL = 'admin'
 
 REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER':
-    'source.utils.exception_hadlers.custom_exception_handler',
-
     'DEFAULT_PERMISSION_CLASSES': (
        'rest_framework.permissions.IsAuthenticated',
     ),
