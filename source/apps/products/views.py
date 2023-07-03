@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from .signals import viewed_product
 
 
-class ProductViewSet(viewsets.ViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Product.objects.all().select_related('brand')
     lookup_field = 'slug'

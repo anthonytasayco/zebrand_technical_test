@@ -3,7 +3,7 @@ from .models import Product
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand_name = serializers.CharField(source="brand.name")
+    brand_name = serializers.CharField(source="brand.name", read_only=True)
 
     class Meta:
         model = Product
