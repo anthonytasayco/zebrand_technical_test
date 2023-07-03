@@ -116,3 +116,12 @@ DATABASES = {
         'PORT': env.str('POSTGRES_PORT', '5432'),
     }
 }
+
+EMAIL_BACKEND = env.get_value(
+    'EMAIL_BACKEND', str, "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_HOST = env.get_value('EMAIL_HOST', str, None)
+EMAIL_HOST_USER = env.get_value('EMAIL_HOST_USER', str, None)
+EMAIL_HOST_PASSWORD = env.get_value('EMAIL_HOST_PASSWORD', str, None)
+DEFAULT_FROM_EMAIL = env.get_value('DEFAULT_FROM_EMAIL', str, None)
+EMAIL_PORT = env.get_value('EMAIL_PORT', int, None)
+EMAIL_USE_TLS = True
