@@ -1,3 +1,3 @@
 #!/bin/bash
 
-celery -A source.config worker -l info
+celery -A config worker -l info

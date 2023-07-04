@@ -369,7 +369,6 @@ postgres_data_local/*
 
 dev_run_celery\.sh
 
-celery.py
 .env
 
 # Bash history

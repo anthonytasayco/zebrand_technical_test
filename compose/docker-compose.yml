@@ -4,7 +4,7 @@ services:
       container_name: zebrand_db
       image: "postgres:13"
       volumes:
-        - ../../volumes/db:/var/lib/postgresql/data
+        - ../volumes/db:/var/lib/postgresql/data
       ports:
         - "5435:5432"
       restart: unless-stopped
@@ -36,18 +36,18 @@ services:
       ports:
         - "6379:6379"
       volumes:
-        - ../../volumes/zebrand-redis:/data
+        - ../volumes/zebrand-redis:/data
     worker:
-        restart: unless-stopped
-        container_name: zebrand-celery
-        build:
-            context: ../
-            dockerfile: ./compose/Dockerfile
-        entrypoint: ./worker-entrypoint.sh
-        environment:
-            CELERY_BROKER_URL: "redis://redis:6379/0"
-            CELERY_RESULT_BACKEND: "redis://redis:6379/0"
-        depends_on:
-            - db
-            - webapp
-            - redis
+      build:
+        context: ../
+        dockerfile: ./compose/Dockerfile
+      command:
+        bash -c "cd source && celery -A config worker -l info --loglevel=info"
+      volumes:
+        - ../source:/www/source
+      restart: unless-stopped
+      container_name: zebrand-celery
+      env_file: ../.env
+      depends_on:
+          - db
+          - redis
