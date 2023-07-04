@@ -36,13 +36,13 @@ Create superuser inside zebrand_webapp
 ## Tools for developing in local environment
 
 The project uses the following libries and tools:
-- django, django rest framework, postgres, smtp, redis, docker.
-- django debug toolbar library
-- mailhog, to view testing mailing notifications visit  http://localhost:8025/
-- swagger, you can visit http://localhost:8000/swagger for check the api documentation
+- Django, django rest framework, postgres, smtp, redis, docker.
+- Django debug toolbar library
+- Mailhog, to view testing mailing notifications visit  http://localhost:8025/
+- Swagger, you can visit http://localhost:8000/swagger for check the api documentation
 
 
 ## Tasks to develop
 - Testing to run all test cases.
-- create the config for a production environment(new docker configuration)
+- Create the config for a production environment(new docker configuration)
 - Generate fixture to load initial data on db.
