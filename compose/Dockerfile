@@ -21,8 +21,10 @@ RUN mkdir ./source
 COPY ./source/ ./source
 COPY ./requirements ./requirements
 COPY ./compose/docker-entrypoint.sh ./entrypoint.sh
+COPY ./compose/worker-entrypoint.sh ./worker-entrypoint.sh
 
 RUN chmod +x ./entrypoint.sh
+RUN chmod +x ./worker-entrypoint.sh
 
 RUN pip install -r ./requirements/local.txt
 EXPOSE 8000

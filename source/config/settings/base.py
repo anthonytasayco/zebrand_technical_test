@@ -132,3 +132,7 @@ EMAIL_HOST = env.get_value('EMAIL_HOST', str, 'smtp-server')
 EMAIL_PORT = env.get_value('EMAIL_PORT', str, '1025')
 
 REDIS_URL = env.get_value('REDIS_URL', str, 'redis://redis:6379/0')
+
+BROKER_URL = 'redis://redis:6379/0'
+CELERY_BROKER_URL = "redis://redis:6379/0"
+# CELERY_RESULT_BACKEND = "redis://redis:6379/0"

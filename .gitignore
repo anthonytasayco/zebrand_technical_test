@@ -374,3 +374,4 @@ celery.py
 
 # Bash history
 .bash_history*
+volumes/

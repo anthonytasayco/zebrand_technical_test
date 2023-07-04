@@ -25,4 +25,5 @@ def send_notification_product_update(sender, instance, **kwargs):
         logger.info('send notification for product: {}'.format(new_instance.id))
         previous = Product.objects.get(id=new_instance.id)
         differences = get_changed_product_fields(previous, new_instance)
-        send_email_admin_product_update(instance.id, differences)
+        send_email_admin_product_update.apply_async(
+            [instance.id, differences], countdown=5)

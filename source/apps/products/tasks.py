@@ -2,12 +2,13 @@ import logging
 from django.db.models import Q
 from django.conf import settings
 from django.core.mail import send_mail
+from celery import shared_task
 from apps.users.models import User
 from .models import Product
 
 logger = logging.getLogger(__name__)
 
-
+@shared_task
 def send_email_admin_product_update(product_id: int, differences: dict):
     try:
         product_instance = Product.objects.get(id=product_id)
