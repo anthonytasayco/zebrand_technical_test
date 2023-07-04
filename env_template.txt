@@ -1,0 +1,9 @@
+
+DEBUG=False
+POSTGRES_DB=zebrand_db
+POSTGRES_USER=zebrand_user
+POSTGRES_PASSWORD=zebrand
+POSTGRES_HOST=db
+POSTGRES_PORT=5432
+
+DEFAULT_FROM_EMAIL=notificaciones@zebrand.mx
