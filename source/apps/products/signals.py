@@ -1,7 +1,7 @@
 import logging
 from django.dispatch import receiver
 from django import dispatch
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save
 from .models import Product
 from .utils import update_product_view_counter, get_changed_product_fields
 from .tasks import send_email_admin_product_update

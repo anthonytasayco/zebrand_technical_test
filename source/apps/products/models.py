@@ -15,6 +15,18 @@ class Brand(TimeStampedModel):
         verbose_name_plural = _('brands')
 
 
+class Category(TimeStampedModel):
+    name = models.CharField(_('name'), max_length=150)
+    category_parent = models.ForeignKey('self', on_delete=models.DO_NOTHING, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
+
+
 class Product(TimeStampedModel):
     is_active = models.BooleanField(_('active'), default=True)
     brand = models.ForeignKey(Brand, related_name='products', on_delete=models.SET_NULL, null=True)
@@ -23,6 +35,7 @@ class Product(TimeStampedModel):
     price = models.DecimalField(_('price'), decimal_places=2, max_digits=12)
     times_visited = models.PositiveIntegerField(_('times visited'), default=0)
     slug = models.SlugField(_('slug'), max_length=150, unique=True)
+    category = models.ManyToManyField(Category, null=True, blank=True)
 
     def __str__(self):
         return f'{self.name} | {self.sku}'

@@ -118,15 +118,6 @@ DATABASES = {
     }
 }
 
-# EMAIL_BACKEND = env.get_value(
-#     'EMAIL_BACKEND', str, "django.core.mail.backends.smtp.EmailBackend")
-# EMAIL_HOST = env.get_value('EMAIL_HOST', str, None)
-# EMAIL_HOST_USER = env.get_value('EMAIL_HOST_USER', str, None)
-# EMAIL_HOST_PASSWORD = env.get_value('EMAIL_HOST_PASSWORD', str, None)
-# DEFAULT_FROM_EMAIL = env.get_value('DEFAULT_FROM_EMAIL', str, None)
-# EMAIL_PORT = env.get_value('EMAIL_PORT', int, None)
-# EMAIL_USE_TLS = True
-
 ENABLE_API_DOCUMENTATION = env.get_value('ENABLE_API_DOCUMENTATION', bool, True)
 EMAIL_HOST = env.get_value('EMAIL_HOST', str, 'smtp-server')
 EMAIL_PORT = env.get_value('EMAIL_PORT', str, '1025')
@@ -135,4 +126,3 @@ REDIS_URL = env.get_value('REDIS_URL', str, 'redis://redis:6379/0')
 
 BROKER_URL = 'redis://redis:6379/0'
 CELERY_BROKER_URL = "redis://redis:6379/0"
-# CELERY_RESULT_BACKEND = "redis://redis:6379/0"
