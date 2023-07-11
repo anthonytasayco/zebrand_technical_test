@@ -1,6 +1,6 @@
-from .models import Product
+from .models import Product, Category
 from django.shortcuts import get_object_or_404
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, CategorySerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser
@@ -28,4 +28,17 @@ class ProductViewSet(viewsets.ModelViewSet):
         product = get_object_or_404(Product, slug=slug)
         serializer = ProductSerializer(product)
         viewed_product.send(sender=Product, product_slug=slug, user=request.user)
+        return Response(serializer.data)
+
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    serializer_class = CategorySerializer
+    queryset = Category.objects.all()
+    lookup_field = 'id'
+
+    def retrieve(self, request, id=None):
+        category = get_object_or_404(Category, id=id)
+        products = Product.objects.filter(category=category)
+        serializer = ProductSerializer(
+            products, many=True)
         return Response(serializer.data)
